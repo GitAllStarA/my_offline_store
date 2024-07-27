@@ -1,4 +1,4 @@
-## My API
+## My Offline Store APIs
 
 This API provides endpoints for managing stores, products, peripherals, and sales.
 
