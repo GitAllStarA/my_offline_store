@@ -1,4 +1,4 @@
-## My API
+## My Offline Store APIs
 
 This API provides endpoints for managing stores, products, peripherals, and sales.
 
@@ -277,13 +277,3 @@ This API provides endpoints for managing stores, products, peripherals, and sale
       "message": "Sale deleted successfully"
     }
     ```
-
-**This is a basic structure. You can enhance it by adding sections for:**
-* Request and Response Formats
-* Error Handling
-* Authentication (if applicable)
-* Rate Limiting
-* Usage Examples
-* Additional Information
-
-**Remember to replace placeholder text with actual details and consider using code blocks for better readability.**
