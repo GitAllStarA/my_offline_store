@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inventories")
+@RequestMapping("/api/inventories")
 public class InventoryController {
     @Autowired
     private InventoryService inventoryService;

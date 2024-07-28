@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/peripherals")
+@RequestMapping("/api/peripherals")
 public class PeripheralController {
     @Autowired
     private PeripheralService peripheralService;
