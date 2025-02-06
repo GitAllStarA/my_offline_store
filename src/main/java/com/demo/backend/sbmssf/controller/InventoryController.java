@@ -1,7 +1,9 @@
 package com.demo.backend.sbmssf.controller;
 
 import com.demo.backend.sbmssf.entity.Inventory;
-import com.example.attstore.service.InventoryService;
+import com.demo.backend.sbmssf.model.Count;
+import com.demo.backend.sbmssf.repository.Repository;
+import com.demo.backend.sbmssf.service.serviceImpl.InventoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/inventories")
 public class InventoryController {
     @Autowired
-    private InventoryService inventoryService;
+    private InventoryServiceImpl inventoryService;
 
     @GetMapping
     public List<Inventory> getAllInventories() {
@@ -25,6 +27,34 @@ public class InventoryController {
                 .map(inventory -> ResponseEntity.ok().body(inventory))
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/count/{storeId}")
+    public ResponseEntity<?> getStoreTotalInventoryCount(@PathVariable Long storeId) {
+        Long xcount = inventoryService.getInventoryOfStore(storeId);
+        if (xcount != null)
+            return ResponseEntity.ok( new Count(storeId, inventoryService.getInventoryOfStore(storeId)));
+        return ResponseEntity.ok(new Count(storeId, 0L));
+    }
+
+    @GetMapping("/storeIdInventory/{storeId}")
+    public ResponseEntity<?> getStoreFullInventory(@PathVariable Long storeId) {
+        List<Inventory> xdata = inventoryService.getStoreInventoryDetailsFull(storeId);
+        if (xdata.isEmpty()) {
+            return (ResponseEntity<?>) ResponseEntity.notFound();
+        }
+        else {
+            return ResponseEntity.ok(xdata);
+        }
+    }
+
+    @GetMapping("/count/store/{storeId}/product/{productId}")
+    public ResponseEntity<?> getProductIdCount(@PathVariable("storeId") Long storeId,
+                                             @PathVariable("productId") Long productId) {
+        if (inventoryService.getProductCountOfStore(storeId, productId) != null)
+           return ResponseEntity.ok(inventoryService.getProductCountOfStore(storeId, productId));
+        return ResponseEntity.ok(0);
+    }
+
 
     @PostMapping
     public Inventory createInventory(@RequestBody Inventory inventory) {

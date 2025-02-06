@@ -1,6 +1,7 @@
 package com.demo.backend.sbmssf.controller;
 
 import com.demo.backend.sbmssf.entity.StorePeripheral;
+import com.demo.backend.sbmssf.model.Count;
 import com.demo.backend.sbmssf.service.StorePeripheralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,23 @@ public class StorePeripheralController {
         return storePeripheralService.getStorePeripheralById(id)
                 .map(storePeripheral -> ResponseEntity.ok().body(storePeripheral))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/storeperipheralsdetails/storeid/{storeId}")
+    public ResponseEntity<?> getStorePeripheralsDetails(@PathVariable Long storeId) {
+        List<StorePeripheral> sp = storePeripheralService.getStorePeripheralsDetails(storeId);
+
+        if (!sp.isEmpty()) {
+            return ResponseEntity.ok(sp);
+        }
+        else {
+            return (ResponseEntity<?>) ResponseEntity.notFound();
+        }
+    }
+
+    @GetMapping("/count/{storeId}")
+    public ResponseEntity<?> getSPCount(@PathVariable Long storeId) {
+        return ResponseEntity.ok(new Count(storeId, storePeripheralService.storePeripheralsCount(storeId)));
     }
 
     @PostMapping

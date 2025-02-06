@@ -3,7 +3,11 @@ package com.demo.backend.sbmssf.service.serviceImpl;
 
 import com.demo.backend.sbmssf.entity.StorePeripheral;
 import com.demo.backend.sbmssf.repository.StorePeripheralRepository;
+import com.demo.backend.sbmssf.repository.StoreRepository;
 import com.demo.backend.sbmssf.service.StorePeripheralService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,12 @@ import java.util.Optional;
 public class StorePeripheralServiceImpl implements StorePeripheralService {
     @Autowired
     private StorePeripheralRepository storePeripheralRepository;
+    private final EntityManagerFactory entityManagerFactory;
+
+    public StorePeripheralServiceImpl(StorePeripheralRepository storePeripheralRepository, EntityManagerFactory entityManagerFactory) {
+        this.storePeripheralRepository = storePeripheralRepository;
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     @Override
     public List<StorePeripheral> getAllStorePeripherals() {
@@ -47,4 +57,15 @@ public class StorePeripheralServiceImpl implements StorePeripheralService {
             return true;
         }).orElse(false);
     }
-}
+
+    @Override
+    public Long storePeripheralsCount(Long storeId) {
+        return storePeripheralRepository.getStorePeripheralCount(storeId);
+    }
+
+    public List<StorePeripheral> getStorePeripheralsDetails(Long storeId) {
+
+        return storePeripheralRepository.getStorePeripheralsDetails(storeId);
+    }
+
+    }

@@ -20,9 +20,9 @@ public class StoreController {
         return storeService.getAllStores();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Store> getStoreById(@PathVariable Long id) {
-        return storeService.getStoreById(id)
+    @GetMapping("/{storeId}")
+    public ResponseEntity<Store> getStoreById(@PathVariable Long storeId) {
+        return storeService.getStoreById(storeId)
                 .map(store -> ResponseEntity.ok().body(store))
                 .orElse(ResponseEntity.notFound().build());
     }

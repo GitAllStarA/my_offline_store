@@ -11,4 +11,7 @@ public interface StorePeripheralService {
     StorePeripheral createStorePeripheral(StorePeripheral storePeripheral);
     Optional<StorePeripheral> updateStorePeripheral(Long id, StorePeripheral storePeripheralDetails);
     boolean deleteStorePeripheral(Long id);
+
+    Long storePeripheralsCount(Long storeId);
+    List<StorePeripheral> getStorePeripheralsDetails(Long storeId);
 }

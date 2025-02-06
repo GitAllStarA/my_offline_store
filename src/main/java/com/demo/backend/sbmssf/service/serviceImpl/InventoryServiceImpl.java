@@ -3,7 +3,7 @@ package com.demo.backend.sbmssf.service.serviceImpl;
 
 import com.demo.backend.sbmssf.entity.Inventory;
 import com.demo.backend.sbmssf.repository.InventoryRepository;
-import com.example.attstore.service.InventoryService;
+import com.demo.backend.sbmssf.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,4 +47,21 @@ public class InventoryServiceImpl implements InventoryService {
             return true;
         }).orElse(false);
     }
+
+    @Override
+    public Long getInventoryOfStore(Long storeId) {
+        return inventoryRepository.findTotalInventoryOfStore(storeId);
+    }
+
+    @Override
+    public Long getProductCountOfStore(Long storeId, Long productId) {
+        return inventoryRepository.getEachProductCount(storeId, productId);
+    }
+
+    @Override
+    public List<Inventory> getStoreInventoryDetailsFull(Long storeId) {
+        return inventoryRepository.getStoreInventoryDetails(storeId);
+    }
+
+
 }

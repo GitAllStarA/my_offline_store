@@ -1,4 +1,4 @@
-package com.example.attstore.service;
+package com.demo.backend.sbmssf.service;
 
 
 import com.demo.backend.sbmssf.entity.Inventory;
@@ -12,4 +12,8 @@ public interface InventoryService {
     Inventory createInventory(Inventory inventory);
     Optional<Inventory> updateInventory(Long id, Inventory inventoryDetails);
     boolean deleteInventory(Long id);
+    Long getInventoryOfStore(Long storeId);
+    Long getProductCountOfStore(Long storeId, Long productId);
+    List<Inventory> getStoreInventoryDetailsFull(Long storeId);
+
 }
