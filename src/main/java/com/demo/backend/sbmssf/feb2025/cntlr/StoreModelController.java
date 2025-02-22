@@ -5,10 +5,7 @@ import com.demo.backend.sbmssf.feb2025.StoreModel;
 import com.demo.backend.sbmssf.feb2025.svc.StoreModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class StoreModelController {
         return storeModelService.getAllStores();
     }
 
-    @GetMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<StoreModel> getStoreById(@PathVariable Long id) {
         return storeModelService.getStoreById(id)
                 .map(ResponseEntity::ok)

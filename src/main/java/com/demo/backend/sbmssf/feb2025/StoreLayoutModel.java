@@ -19,6 +19,11 @@ public class StoreLayoutModel {
 
     private int gridX;
     private int gridY;
+    private int rowStart;
+    private int colStart;
+    private int rowEnd;
+    private int colEnd;
+
     private String sectionName;
 
     @Column(name = "inventory_id", nullable = false)

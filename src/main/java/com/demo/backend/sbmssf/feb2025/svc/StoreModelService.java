@@ -21,4 +21,6 @@ public class StoreModelService {
     public Optional<StoreModel> getStoreById(Long id) {
         return storeModelRepository.findById(id);
     }
+
+
 }
